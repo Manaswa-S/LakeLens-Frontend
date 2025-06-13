@@ -1,0 +1,40 @@
+:root {
+    /* --color-primary: #7c4dff; */
+    --color-primary: #6c63ff;
+    --color-primary-dark: #070410;
+    --color-secondary: #4FC3F7;
+
+    --bg: #dfd7f5; /* Light theme background */
+    /* --bg: #6032df; Light theme background */
+
+    --shadow-color: rgba(108, 99, 255, 0.3);
+
+    --border: #dcdcdc;
+
+    --text: #1f1f1f; /* Light theme text color */
+    --subtext: #5f77c0; /* Light theme subtext */
+    
+    /* --button-bg: #4FC3F7; Light theme button background */
+    --button-bg: #6c63ff; /* Light theme button background */
+}
+
+[data-theme="dark"] {
+    --color-primary: #6c63ff;
+    --color-primary-dark: #070410;
+    --color-secondary: #4FC3F7;
+
+    /* Dark Mode Background */
+    --bg: #070410;
+
+    --shadow-color: rgba(191, 190, 213, 0.493);
+    
+    /* Dark Mode Text Colors */
+    --text: #e0e0e0; /* Lighter text for better contrast on dark background */
+    --text-dark: #343434;
+    
+    /* Dark Mode Subtext (should be subtle but visible) */
+    --subtext: #a8b2d1; /* Softer, light grayish blue for subtext */
+    
+    /* Dark Mode Button Background */
+    --button-bg: #6c63ff; /* You can keep this or go with a more subdued color */
+}

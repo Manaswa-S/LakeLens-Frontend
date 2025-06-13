@@ -1,0 +1,3 @@
+1)  for simultaneous requests, if tokens have expired, all those requests fail and therefore all of those try for a new refresh
+
+2)  input validation should be done, none will be done in the base dev tho
