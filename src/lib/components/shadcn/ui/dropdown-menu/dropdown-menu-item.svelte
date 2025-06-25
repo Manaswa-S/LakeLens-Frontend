@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { cn } from "$lib/utils.js";
 	import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
 
@@ -7,6 +7,8 @@
 		class: className,
 		inset,
 		...restProps
+	}: DropdownMenuPrimitive.ItemProps & {
+		inset?: boolean;
 	} = $props();
 </script>
 

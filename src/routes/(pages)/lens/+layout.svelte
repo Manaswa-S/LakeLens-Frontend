@@ -1,70 +1,52 @@
-<script>
-	//
-	import { currentTheme, toggleTheme } from '$lib/styles/theme';
+<script lang="ts">
+	import { currentTheme, toggleTheme } from '$lib/stores/theme.ts';
 
 	import Moon from '@lucide/svelte/icons/moon';
 	import Sun from '@lucide/svelte/icons/sun';
-	import Heart from '@lucide/svelte/icons/heart';
+	import LoaderRaw from '$lib/components/extras/LoaderRaw.svelte';
+
 	import { onMount } from 'svelte';
 
+	import { vhHeight, vhWidth } from '$lib/stores/internal.ts';
+	import { settings } from '$lib/stores/lens-global.ts';
+	import type { PageProps } from '../../$types.js';
 	import { Toaster } from 'svelte-sonner';
 
-	const switchTheme = () => {
-		toggleTheme();
-		const toggle = document.querySelector('.theme-toggle');
-		toggle.addEventListener('click', () => {
-			document.documentElement.classList.toggle('dark-mode');
-		});
-	};
-	$: theme = $currentTheme;
+	let { data }: PageProps = $props();
 
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
-	// get data from server.js
-	// set all global stores
-
-	import { settings } from '$lib/stores/lens-global.ts';
-	import { redirect } from '@sveltejs/kit';
-	import { goto } from '$app/navigation';
-
-	export let data;
-
-	function loadGlobals() {
-		settings.set(data.accSettings);
-	}
-	loadGlobals();
+	settings.set(data.accSettings); // remember, this runs twice, ssr and hydration.
 
 	onMount(() => {
-		function checks() {
-			const width = window.innerWidth;
-			const height = window.innerHeight;
-
-			console.log('Viewport Width:', width);
-			console.log('Viewport Height:', height);
-
-			// if (width < 1200) {
-			// 	goto('/redirect?msg=Device+Width+Too+Low&countdown=3&redirect=%2Fhome');
-			// }
+		if (typeof window == 'undefined') {
+			// TODO: do something, this can break everything else.
+			return;
 		}
-		checks();
+
+		function updateDimensions() {
+			vhHeight.set(window.innerHeight);
+			vhWidth.set(window.innerWidth);
+		}
+		updateDimensions();
+
+		window.addEventListener('resize', updateDimensions);
 	});
+
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 </script>
 
 <slot />
 
+<LoaderRaw />
 <Toaster position="top-center" expand={false} richColors closeButton theme={$currentTheme} />
 
 <div class="footer">
 	<div class="footer-left">
-		<a href="/feedback">
+		<a href="/feedback" target="_blank" rel="noopener noreferrer">
 			<p>Feedback</p>
 		</a>
 	</div>
 
 	<p>© 2025 LakeLens. Built with ❤️ for data infrastructure.</p>
-
-	<!-- <p>
-		© 2025 LakeLens. Built with <Heart /> for data infrastructure.
-	</p> -->
 
 	<div class="footer-right">
 		<a href="/privacy">
@@ -75,8 +57,14 @@
 			<p>Terms</p>
 		</a>
 
-		<button class="theme-toggle" aria-label="Toggle theme" onclick={switchTheme}>
-			{#if theme === 'light'}
+		<button
+			class="theme-toggle"
+			aria-label="Toggle theme"
+			onclick={() => {
+				toggleTheme();
+			}}
+		>
+			{#if $currentTheme === 'light'}
 				<Moon />
 			{:else}
 				<Sun />
@@ -85,8 +73,9 @@
 	</div>
 </div>
 
-<style global>
-	@import '$lib/styles/shadcn.css'; /* bleeds, but let it be for now.*/
+<style>
 	@import '$lib/styles/theme.css';
-	@import '$lib/styles/lens.css';
+
+	@import '$lib/styles/lens/shadcn-lens.css';
+	@import '$lib/styles/lens/lens.css';
 </style>

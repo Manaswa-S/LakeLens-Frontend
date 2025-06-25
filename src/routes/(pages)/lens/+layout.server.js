@@ -1,5 +1,5 @@
 // +page.server.js
-import { callGoRoute } from '$lib/server/callGo.js';
+import { callGoRoute } from '$lib/server/callGo.ts';
 import { redirect } from '@sveltejs/kit';
 
 

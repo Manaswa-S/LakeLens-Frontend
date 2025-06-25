@@ -1,3 +1,6 @@
-1)  for simultaneous requests, if tokens have expired, all those requests fail and therefore all of those try for a new refresh
+1)  navigating to the feedback form, somehow triggers the settings update func.
 
 2)  input validation should be done, none will be done in the base dev tho
+
+3)  have a mark in the sidebar for each item, denoting if it is valid, checked, authenticated, etc.
+    so like on each refresh of the sidebar, also check if the locations are active and all.

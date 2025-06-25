@@ -1,16 +1,3 @@
-export type Settings = {
-    // Preferences
-    AdvancedMetaData: boolean
-    CompactView: boolean
-    AutoRefreshInterval: Number
-    Notifications: boolean
-    // UI/UX
-    Theme: string
-    FontSize: number
-    ShowToolTips: boolean
-    // Usage
-    KeyboardShortcuts: boolean
-};
 
 
 export type NewProject = {
@@ -33,7 +20,23 @@ export type AzureCreds = {
 };
 
 
-export type SearchChoice = {
-    Label: string
-    Link: string
+export type LakeDetails = {
+    CreatedAt: string;
+    LakeID: number;
+    Name: string;
+    Ptype: string;
+    Region: string;
 };
+export type LocDetails = { BucketName: string; CreatedAt: string; LakeID: number; LocID: number };
+
+
+
+
+export type LocChecks = {
+    LocID: number;
+    BucketName: string;
+    AuthCheck: boolean;
+    PolicyCheck: boolean;
+    ReadCheck: boolean;
+    WriteCheck: boolean;
+}

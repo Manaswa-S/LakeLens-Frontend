@@ -1,31 +1,21 @@
-<script>
-	import * as DropdownMenu from '$lib/components/shadcn/ui/dropdown-menu/index.js';
+<script lang="ts">
+	import * as DropdownMenu from '$lib/components/shadcn/ui/dropdown-menu';
 	import * as Avatar from '$lib/components/shadcn/ui/avatar';
-	import { Button } from '$lib/components/shadcn/ui/button/index.js';
-	import DropdownMenuLabel from './shadcn/ui/dropdown-menu/dropdown-menu-label.svelte';
-
+	import { Button } from '$lib/components/shadcn/ui/button/index.ts';
+	import DropdownMenuLabel from '$lib/components/shadcn/ui/dropdown-menu/dropdown-menu-label.svelte';
 	import { UserRound } from '@lucide/svelte/icons';
 
-	export let data;
+	import { profileData, accBilling } from '$lib/stores/lens-global.ts';
+	import { toReadableTime } from '$lib/common/time.ts';
 
-	const createdAt = new Date(data.accDetails.CreatedAt);
-
-	const readableCreatedAt = createdAt.toLocaleString('en-IN', {
-		year: 'numeric',
-		month: 'short',
-		day: '2-digit',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit',
-		hour12: true
-	});
+	let {} = $props();
 </script>
 
 <DropdownMenu.Root>
-	<DropdownMenu.Trigger asChild>
+	<DropdownMenu.Trigger>
 		<Button>
 			Account
-			{@render avatarRender(data)}
+			{@render avatarRender($profileData.Picture)}
 		</Button>
 	</DropdownMenu.Trigger>
 
@@ -33,7 +23,7 @@
 		<DropdownMenuLabel>Details</DropdownMenuLabel>
 		<DropdownMenu.Group>
 			<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
-				{#if data.accDetails.Confirmed}
+				{#if $profileData.Confirmed}
 					<span class="green"> Confirmed </span>
 				{:else}
 					<span class="red"> Not Confirmed </span>
@@ -42,29 +32,29 @@
 
 			<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 				<span>Authenticated By : </span>
-				<span>{data.accDetails.AuthType}</span>
+				<span>{$profileData.AuthType}</span>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 				<span>Name : </span>
-				<span>{data.accDetails.Name}</span>
+				<span>{$profileData.Name}</span>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 				<span>Email : </span>
-				<span class="truncate" title={data.accDetails.Email}>
-					{data.accDetails.Email}
+				<span class="truncate" title={$profileData.Email}>
+					{$profileData.Email}
 				</span>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 				<span>Created At : </span>
-				<span>{readableCreatedAt}</span>
+				<span>{toReadableTime($profileData.CreatedAt)}</span>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 				<span>Account ID : </span>
-				<span>{data.accDetails.UUID}</span>
+				<span>{$profileData.UUID}</span>
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item>
@@ -76,19 +66,19 @@
 
 		<DropdownMenuLabel>Billing</DropdownMenuLabel>
 		<DropdownMenu.Group>
-			{#if data.accBilling.Applicable}
+			{#if $accBilling.Applicable}
 				<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 					<span class="green"> Applicable </span>
 				</DropdownMenu.Item>
 
 				<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 					<span>Type : </span>
-					<span>{data.accBilling.Type}</span>
+					<span>{$accBilling.Type}</span>
 				</DropdownMenu.Item>
 
 				<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
 					<span>Next Pay : </span>
-					<span>{data.accBilling.NextPay}</span>
+					<span>{toReadableTime($accBilling.NextPay)}</span>
 				</DropdownMenu.Item>
 			{:else}
 				<DropdownMenu.Item class="grid grid-cols-[140px_1fr] items-center gap-2">
@@ -148,9 +138,9 @@
 	</DropdownMenu.Content>
 </DropdownMenu.Root>
 
-{#snippet avatarRender(data)}
+{#snippet avatarRender(avatarSrc: string)}
 	<Avatar.Root slot="avatar" class="p-1">
-		<Avatar.Image src={data.accDetails.Picture} class="object-cover" />
+		<Avatar.Image src={avatarSrc} class="object-cover" />
 		<Avatar.Fallback>
 			<UserRound />
 		</Avatar.Fallback>

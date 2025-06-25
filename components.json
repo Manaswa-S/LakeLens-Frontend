@@ -1,7 +1,7 @@
 {
 	"$schema": "https://tw3.shadcn-svelte.com/schema.json",
 	"tailwind": {
-		"css": "src/lib/styles/shadcn.css",
+		"css": "src/lib/styles/public/shadcn-lens.css",
 		"baseColor": "gray"
 	},
 	"aliases": {

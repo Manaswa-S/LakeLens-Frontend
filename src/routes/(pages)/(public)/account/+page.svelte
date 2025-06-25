@@ -73,21 +73,28 @@
 	}
 </script>
 
-<header>
-	<div class="logo">
-		<a href="/home"> LakeLens </a>
+<div class="top-bar">
+	<div class="top-bar-left">
+		<div class="top-bar-logo">
+			<a href="/home">
+				<img src="/favicon.png" alt="PP" />
+			</a>
+		</div>
+		<a class="top-bar-logo" href="/home">LakeLens</a>
 	</div>
 
-	<nav>
-		<a href="/home">Home</a>
-	</nav>
-</header>
+	<div class="top-bar-nav">
+		<div class="top-bar-nav-elem">
+			<a href="/home">Home</a>
+		</div>
+	</div>
+</div>
 
 {#if !showForgot}
 	<div class="auth-main" id="loginCard">
 		<div class="auth-container">
 			<h2>Welcome</h2>
-			<p class="subheading">Just sign in - we'll create your account if it's your first time.</p>
+			<p class="sub-top-bar">Just sign in - we'll create your account if it's your first time.</p>
 
 			<div class="separator">
 				<hr class="line" />
@@ -95,7 +102,14 @@
 			</div>
 
 			<div class="g-signin">
-				<a href="/" on:click|preventDefault={oauthGoogle} class="google-btn">
+				<a
+					href="/"
+					onclick={(e) => {
+						e.preventDefault();
+						oauthGoogle();
+					}}
+					class="google-btn"
+				>
 					<div class="google-icon-wrapper">
 						<img
 							class="google-icon"
@@ -113,9 +127,14 @@
 				<hr class="line" />
 			</div>
 
-			<p class="subheading red">{err}</p>
+			<p class="sub-top-bar red">{err}</p>
 
-			<form id="authForm" on:submit={epassAuth}>
+			<form
+				id="authForm"
+				onsubmit={(e) => {
+					epassAuth(e);
+				}}
+			>
 				<div class="form-group">
 					<label for="Email">Email</label>
 					<input type="email" id="email" name="email" placeholder="Enter your email" required />
@@ -131,8 +150,17 @@
 					/>
 				</div>
 				<button type="submit" class="login-btn">Continue</button>
+
+				<p class="extra-links text-sm">By continuing, you agree to our terms and conditions.</p>
+
 				<div class="extra-links {showHint ? 'jump' : ''}">
-					<a href="/" on:click|preventDefault={toggleForgot}>Forgot Password?</a>
+					<a
+						href="/"
+						onclick={(e) => {
+							e.preventDefault();
+							toggleForgot();
+						}}>Forgot Password?</a
+					>
 				</div>
 			</form>
 		</div>
@@ -141,22 +169,33 @@
 	<div class="auth-main" id="forgotCard">
 		<div class="auth-container">
 			<h2>Forgot Password ?</h2>
+			<p class="sub-top-bar">No worries! Enter your email and reset your password.</p>
 			<div class="separator">
 				<hr class="line" />
 				<hr class="line" />
 			</div>
 
-			<p class="subheading">No worries! Enter your email and reset your password.</p>
+			<p class="sub-top-bar red">{err}</p>
 
-			<p class="subheading red">{err}</p>
-
-			<form id="forgotForm" on:submit={forgotPass}>
+			<form
+				id="forgotForm"
+				onsubmit={(e) => {
+					forgotPass(e);
+				}}
+			>
 				<div class="form-group">
+					<label for="Email">Email</label>
 					<input type="email" id="email" name="email" placeholder="Enter your email" required />
 				</div>
 				<button type="submit" class="login-btn">Continue</button>
 				<div class="extra-links">
-					<a href="/" on:click|preventDefault={toggleForgot}>Account</a>
+					<a
+						href="/"
+						onclick={(e) => {
+							e.preventDefault();
+							toggleForgot();
+						}}>Account</a
+					>
 				</div>
 			</form>
 		</div>
@@ -164,5 +203,4 @@
 {/if}
 
 <style>
-	/*  */
 </style>

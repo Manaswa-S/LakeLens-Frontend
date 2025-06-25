@@ -39,8 +39,6 @@ export async function GET({url, cookies}) {
             throw new Error("Bad TTL values");
         }
 
-        console.log('setting cookies');
-
         cookies.set("lens_t_acc", result.ATStr, {
             path: '/',
             httpOnly: true,

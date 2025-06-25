@@ -10,12 +10,12 @@
 		getSortedRowModel,
 		getFilteredRowModel
 	} from '@tanstack/table-core';
-	import { createSvelteTable, FlexRender } from '$lib/components/shadcn/ui/data-table/index.js';
-	import * as TableUI from '$lib/components/shadcn/ui/table/index.js';
-	import { Button } from '$lib/components/shadcn/ui/button/index.js';
-	import { Input } from '$lib/components/shadcn/ui/input/index.js';
+	import { createSvelteTable, FlexRender } from '$lib/components/shadcn/ui/data-table/index.ts';
+	import * as TableUI from '$lib/components/shadcn/ui/table/index.ts';
+	import { Button } from '$lib/components/shadcn/ui/button/index.ts';
+	import { Input } from '$lib/components/shadcn/ui/input/index.ts';
 
-	import { locsSelected } from '$lib/stores/lens-global.ts';
+	import { locsSelected } from '$lib/stores/internal.ts';
 
 	const {
 		columns,
@@ -85,12 +85,12 @@
 
 	$effect(() => {
 		if (table) {
-			const a = table.getFilteredSelectedRowModel().rows;
-			let b: any[] = [];
-			a.forEach((row) => {
-				b.push(row.original);
+			const rows = table.getFilteredSelectedRowModel().rows;
+			let selected: any[] = [];
+			rows.forEach((row) => {
+				selected.push(row.original);
 			});
-			locsSelected.set(b);
+			locsSelected.set(selected);
 		}
 	});
 </script>

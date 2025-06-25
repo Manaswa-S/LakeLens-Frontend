@@ -1,5 +1,5 @@
 // +page.server.js
-import { callGoRoute } from '$lib/server/callGo.js';
+import { callGoRoute } from '$lib/server/callGo.ts';
 import { redirect } from '@sveltejs/kit';
 
 export async function load({cookies}) {
@@ -12,7 +12,7 @@ export async function load({cookies}) {
 			return null;
 		}
 	}
-	
+
 	const [accDetails, accBilling, accProjects] = await Promise.all([
 		safeCall(() => loadAccDetails(cookies)),
 		safeCall(() => loadAccBilling(cookies)),
@@ -25,27 +25,26 @@ export async function load({cookies}) {
 
 	return {
 		accDetails,
-		accBilling,
 		accProjects,
-	}
-	
+		accBilling,
+	};
 }
 
 
 async function loadAccDetails(cookies) {
 
-	const resp = await callGoRoute({
+	const details = await callGoRoute({
         url: `/lens/manager/account/details`,
         cookies
     });
-    if (resp.data === null){
+    if (details.data === null){
 		return null;
     }
 
-    const pp = await getPP(resp.data.Picture);
-    resp.data.Picture = pp;
+    const pp = await getPP(details.data.Picture);
+    details.data.Picture = pp;
 
-    return resp.data;
+    return details.data;
 }
 
 async function getPP(pictureUrl) {
@@ -73,7 +72,6 @@ async function getPP(pictureUrl) {
 	}
 }
 
-
 async function loadAccBilling(cookies) {
 
 	const accBilling = await callGoRoute({
@@ -91,12 +89,3 @@ async function loadAccProjects(cookies) {
     });
     return accProjects.data;
 }
-
-// async function loadSearchSet(cookies) {
-
-// 	const accSettings = await callGoRoute({
-//         url: `/lens/manager/account/settings`,
-//         cookies
-//     });
-//     return accSettings.data;
-// }

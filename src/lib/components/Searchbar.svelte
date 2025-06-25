@@ -1,44 +1,24 @@
 <script lang="ts">
-	import { Input } from '$lib/components/shadcn/ui/input';
-	import * as Popover from '$lib/components/shadcn/ui/popover/index.js';
-
+	import { Input } from '$lib/components/shadcn/ui/input/index.ts';
+	import * as Popover from '$lib/components/shadcn/ui/popover/index.ts';
 	import Search from '@lucide/svelte/icons/search';
-	import { onMount } from 'svelte';
+	import { searchChoices, type SearchChoice } from '$lib/stores/internal.ts';
 
-	import type { SearchChoice } from '$lib/types/global';
+	let {} = $props();
 
-	// TODO: this should be all dynamic, fetch the searchable set and send searches back
-	// export let data;
-	// let choices: string[] = data.Choices;
-
-	let choices: SearchChoice[] = [];
-
-	async function getChoices() {
-		const update = await fetch('/api/lens/search/choices', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-
-		const resp = await update.json();
-		console.log(resp);
-		choices = resp.data;
-		console.log(choices);
-	}
-
-	onMount(() => {
-		getChoices();
-	});
-
-	let open = false;
-	let results: SearchChoice[] = [];
-	let query = '';
+	let open = $state(false);
+	let results: SearchChoice[] = $state([]);
+	let query = $state('');
 
 	function handleSearch() {
-		results = choices.filter((item) => item.Label.toLowerCase().includes(query.toLowerCase()));
+		results = $searchChoices.filter((item) =>
+			item.Label.toLowerCase().includes(query.toLowerCase())
+		);
 		open = true;
 	}
+
+	// TODO: on pressing space as the input to the search bar, it shifts focus
+	
 </script>
 
 <div class="search-list">

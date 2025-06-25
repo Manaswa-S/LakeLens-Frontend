@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { callGoRoute } from '$lib/server/callGo.js';
+import { callGoRoute } from '$lib/server/callGo.ts';
 
 export async function PATCH({ request, cookies }) {
 	try {

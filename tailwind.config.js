@@ -6,12 +6,12 @@ const config = {
 	darkMode: ["class"],
 	content: ["./src/lib/components/shadcn/**/*.{html,js,svelte,ts}"],
 	safelist: [
-		'dark', 'p-1',
-		'p-2', 'p-3', 'p-5', 'pl-16', 'pl-4', 'pt-6', 'pb-4', 'pr-1', 'pl-1', 'pl-2',
-		'ring-2', 'ring-gray-300',
-		'rounded-full',
-		'object-cover',
-		'ml-1', 'text-sm',
+		'dark', 'p-1', 'w-full', 'my-4', 'h-px', 'bg-border', 'rounded-sm', 'w-[10px]', 'h-[10px]', 
+		'p-2', 'p-3', 'p-5', 'pl-16', 'pl-4', 'pt-6', 'pb-4', 'pr-1', 'pl-1', 'pl-2', 'pt-8', 'pl-6', 'pb-1',
+		'ring-2', 'ring-gray-300', 'w-[12px]', 'h-[12px]',
+		'rounded-full', 'font-bold', 'stroke-3', 'stroke-4',
+		'object-cover', 'text-lg', 'text-base',
+		'ml-1', 'ml-2', 'text-sm', 'my-4',
 		'flex', 'justify-between', 'items-center', 'gap-2', 'gap-4',
 		'ml-auto', 'max-w-[350px]', 'max-w-[450px]', 'truncate', 'text-muted-foreground',
 		'grid', 'grid-cols-[140px_1fr]', 'gap-2', 'items-center',
@@ -20,9 +20,12 @@ const config = {
 		'flex-1', 'flex-col', 'gap-4', 'p-4', 'auto-rows-min', 'gap-4', 'md:grid-cols-3',
 		'bg-muted/50', 'aspect-video', 'rounded-xl',
 		'min-h-[100vh]', 'flex-1', 'rounded-xl', 'md:min-h-min',
-		'tracking-wide', 'uppercase', 'h-1', 'h-2', 'h-3', 'h-4', 'animate-spin',
+		'tracking-wide', 'uppercase', 'h-1', 'h-2', 'h-3', 'h-4', 'h-5', 'animate-spin',
 		'justify-start', 'underline',
-		'w-4', 'w-full', 'text-green-600', 'text-red-600', 'pt-2', 'pb-0', 'max-w-lg'
+		'w-4', 'w-5', 'w-full', 'text-green-600', 'text-red-600', 'pt-2', 'pb-0', 'max-w-lg',
+		'transition-transform', 'duration-300', 'rotate-90', 'rotate-[360deg]', 'duration-2000',
+		'stroke-red-500', 'stroke-green-600', 'h-[15px]', 'w-[15px]', 'stroke-red-600', 'stroke-green-500',
+		'w-[250px]', 'w-[200px]', 'size-12', 'capitalize', 'uppercase'
 	],
 	theme: {
 		container: {
@@ -33,6 +36,11 @@ const config = {
 			}
 		},
 		extend: {
+			strokeWidth: {
+				3: '3',
+				4: '4',
+			},			
+
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",

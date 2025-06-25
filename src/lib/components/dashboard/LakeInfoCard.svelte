@@ -1,16 +1,12 @@
-<script>
-	import { Button } from '$lib/components/shadcn/ui/button/index.js';
-	import { Label } from '$lib/components/shadcn/ui/label/index.js';
-	import { Input } from '$lib/components/shadcn/ui/input/index.js';
-	import * as Card from '$lib/components/shadcn/ui/card/index.js';
-	import { toReadableTime } from '$lib/common/readableTime';
+<script lang="ts">
+	import { Label } from '$lib/components/shadcn/ui/label/index.ts';
+	import * as Card from '$lib/components/shadcn/ui/card/index.ts';
+	import { toReadableTime } from '$lib/common/time.ts';
 
 	export let lake;
-
 	const createdAt = toReadableTime(lake.CreatedAt);
 </script>
 
-<!-- <div class="flex justify-center items-start p-4"> -->
 <Card.Root class="project-card">
 	<Card.Header>
 		<Card.Title class="text-lg font-semibold">Name: {lake.Name}</Card.Title>
@@ -23,4 +19,3 @@
 		<Label>Region: {lake.Region}</Label>
 	</Card.Content>
 </Card.Root>
-<!-- </div> -->

@@ -1,75 +1,20 @@
-<script>
+<script lang="ts">
 	import * as Dialog from '$lib/components/shadcn/ui/dialog';
-	import { Button, buttonVariants } from '$lib/components/shadcn/ui/button/index.js';
-	import { Input } from '$lib/components/shadcn/ui/input/index.js';
-	import { Label } from '$lib/components/shadcn/ui/label/index.js';
-	import { Switch } from '$lib/components/shadcn/ui/switch/index.js';
-	import * as Tooltip from '$lib/components/shadcn/ui/tooltip/index.js';
-	import CalendarDaysIcon from '@lucide/svelte/icons/calendar-days';
-	import * as Avatar from '$lib/components/shadcn/ui/avatar/index.js';
-	import * as HoverCard from '$lib/components/shadcn/ui/hover-card/index.js';
-	import * as Select from '$lib/components/shadcn/ui/select/index.js';
+	import { buttonVariants } from '$lib/components/shadcn/ui/button/index.ts';
+	import { Input } from '$lib/components/shadcn/ui/input/index.ts';
+	import { Label } from '$lib/components/shadcn/ui/label/index.ts';
+	import { Switch } from '$lib/components/shadcn/ui/switch/index.ts';
+	import * as HoverCard from '$lib/components/shadcn/ui/hover-card/index.ts';
 	import Info from '@lucide/svelte/icons/info';
-	import { Progress } from '$lib/components/shadcn/ui/progress/index';
-
-	// TODO: this whole theme switching is wrong
-	import { currentTheme, toggleTheme } from '$lib/styles/theme';
-	$: currTheme = $currentTheme;
-	const switchTheme = () => {
-		toggleTheme();
-	};
-	const themes = [
-		{ value: 'light', label: 'Light' },
-		{ value: 'dark', label: 'Dark' }
-	];
-
-	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
 
 	import { settings } from '$lib/stores/lens-global.ts';
+	import { toggleTheme } from '$lib/stores/theme.ts';
 
-	let firstLoad = true;
-
-	import { get } from 'svelte/store';
-
-	import { toast } from 'svelte-sonner';
-
-	let debounceID = 0;
-
-	async function saveSettings() {
-		const settingsData = get(settings);
-		const update = await fetch('/api/account/settings', {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(settingsData)
-		});
-
-		const resp = await update.json();
-
-		if (update.status === 200) {
-			toast.success('Settings updated.');
-		} else {
-			toast.success('Failed to update settings.');
-		}
-	}
-	function saveHelper() {
-		if (firstLoad) {
-			firstLoad = false;
-			return;
-		}
-
-		const runID = ++debounceID;
-
-		setTimeout(() => {
-			if (runID === debounceID) saveSettings();
-		}, 5000);
-	}
-	$: saveHelper($settings);
+	let {} = $props();
 </script>
 
 <Dialog.Root>
-	<Dialog.Trigger class={buttonVariants({ variant: '' })}>Settings</Dialog.Trigger>
+	<Dialog.Trigger class={buttonVariants()}>Settings</Dialog.Trigger>
 	<Dialog.Content class="settings max-w-lg">
 		<Dialog.Header>
 			<Dialog.Title>Settings</Dialog.Title>
@@ -170,15 +115,20 @@
 				{@render infoHover('', 'Switch between light and dark themes for your preferred look.')}
 			</Label>
 
-			{@render select(
-				themes,
-				themes.find((t) => t.value === currTheme)
-			)}
+			{#key $settings.Theme}
+				<Switch
+					checked={$settings.Theme === 'dark'}
+					onclick={() => {
+						toggleTheme();
+					}}
+					id="keyboard-shortcuts"
+				/>
+			{/key}
 		</div>
 	</Dialog.Content>
 </Dialog.Root>
 
-{#snippet infoHover(title, desc)}
+{#snippet infoHover(title: string, desc: string)}
 	<HoverCard.Root>
 		<HoverCard.Trigger>
 			<Info class="w-4 h-4" />
@@ -190,19 +140,4 @@
 			</div>
 		</HoverCard.Content>
 	</HoverCard.Root>
-{/snippet}
-
-{#snippet select(items, trigger)}
-	<Select.Root type="single">
-		<Select.Trigger class="w-24 select-trigger">{trigger.label}</Select.Trigger>
-		<Select.Content class="select" on:change={switchTheme}>
-			<Select.Group>
-				{#each items as item (item.value)}
-					<Select.Item value={item.value} label={item.label}>
-						{item.label}
-					</Select.Item>
-				{/each}
-			</Select.Group>
-		</Select.Content>
-	</Select.Root>
 {/snippet}
