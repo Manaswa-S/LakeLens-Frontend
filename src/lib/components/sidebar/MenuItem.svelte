@@ -110,7 +110,7 @@
 	let chevdown = $state(true);
 </script>
 
-<ContextMenu.Root>
+<ContextMenu.Root >
 	<ContextMenu.Trigger class="flex">
 		<Collapsible.Trigger
 			onclick={() => {
@@ -118,7 +118,7 @@
 			}}
 		>
 			<Sidebar.MenuItem>
-				<Sidebar.MenuButton class="flex items-center justify-between">
+				<Sidebar.MenuButton class="flex items-center justify-between rounded">
 					<ChevronRight class="w-4 h-4 transition-transform {chevdown ? 'rotate-90' : ''}" />
 					<Boxes class="w-4 h-4" />
 					{lake.Name}

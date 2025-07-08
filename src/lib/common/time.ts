@@ -15,7 +15,7 @@ export function toReadableTime(time: string) {
 }
 
 
-export function fromUnixToReadable(unix: number | string) {
+export function fromUnixToReadable(unix: number | string | Number) {
     const dateTime = new Date(Number(unix))
     const readableDateTime = dateTime.toLocaleString('en-IN', {
         year: 'numeric',
@@ -24,7 +24,7 @@ export function fromUnixToReadable(unix: number | string) {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: true
+        hour12: true // TODO: remove this to make it 24hr
     });
     return readableDateTime;
 }

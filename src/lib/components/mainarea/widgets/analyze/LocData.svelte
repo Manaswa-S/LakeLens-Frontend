@@ -53,19 +53,61 @@
 {:else}
 	<div class="loc-data-container">
 		<div class="loc-data-grid-elem">
-			<p class="loc-data-field">URI:</p>
+			<p class="loc-data-field">Found At:</p>
 
 			<div class="copy-able">
-				<p class="loc-data-value copy-able">
-					{metadata.URI}
+				<p class="loc-data-value">
+					{metadata.FoundAt}
 				</p>
 				{#if copiedID == 'copy-lake-uri'}
 					<ClipboardCheck class="h-4 w-4" />
 				{:else}
 					<Copy
-						class="h-4 w-4 cursor-pointer"
+						class="h-4 w-4 cursor-pointer on-hover"
 						onclick={() => {
-							copyToClipboard('copy-lake-uri', metadata.URI);
+							copyToClipboard('copy-lake-uri', metadata.FoundAt);
+						}}
+					/>
+				{/if}
+			</div>
+		</div>
+		<hr class="elem-bottom-border" />
+
+		<div class="loc-data-grid-elem">
+			<p class="loc-data-field">Location:</p>
+
+			<div class="copy-able">
+				<p class="loc-data-value">
+					{metadata.Location}
+				</p>
+				{#if copiedID == 'copy-lake-uri'}
+					<ClipboardCheck class="h-4 w-4" />
+				{:else}
+					<Copy
+						class="h-4 w-4 cursor-pointer on-hover"
+						onclick={() => {
+							copyToClipboard('copy-lake-uri', metadata.Location);
+						}}
+					/>
+				{/if}
+			</div>
+		</div>
+		<hr class="elem-bottom-border" />
+
+		<div class="loc-data-grid-elem">
+			<p class="loc-data-field">Table UUID:</p>
+
+			<div class="copy-able">
+				<p class="loc-data-value">
+					{metadata.TableUUID}
+				</p>
+				{#if copiedID == 'copy-lake-uri'}
+					<ClipboardCheck class="h-4 w-4" />
+				{:else}
+					<Copy
+						class="h-4 w-4 cursor-pointer on-hover"
+						onclick={() => {
+							copyToClipboard('copy-lake-uri', metadata.TableUUID);
 						}}
 					/>
 				{/if}
@@ -85,7 +127,7 @@
 						<ClipboardCheck class="h-4 w-4" />
 					{:else}
 						<Copy
-							class="h-4 w-4 cursor-pointer"
+							class="h-4 w-4 cursor-pointer on-hover"
 							onclick={() => {
 								copyToClipboard(`copy-${entry.name}-uri`, entry.value);
 							}}

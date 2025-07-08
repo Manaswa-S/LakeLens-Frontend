@@ -454,3 +454,9 @@ nav {
 .bg-green {
     background-color: green;
 }
+
+
+.schema-compare-select {
+    padding: 2px 8px 2px 6px !important;
+    height: 100% !important;
+}

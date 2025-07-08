@@ -10,9 +10,14 @@ import Tips from './widgets/init/Tips.svelte';
 
 import LocData from '$lib/components/mainarea/widgets/analyze/LocData.svelte';
 import Graphs from '$lib/components/mainarea/widgets/analyze/Graphs.svelte';
-import Metadata from '$lib/components/mainarea/widgets/analyze/Metadata.svelte';
+import Schema from '$lib/components/mainarea/widgets/analyze/Schema.svelte';
+import PartitionNSnapshot from '$lib/components/mainarea/widgets/analyze/PartitionNSnapshot.svelte';
 import Statistics from '$lib/components/mainarea/widgets/analyze/Statistics.svelte';
 import { projectsList } from '$lib/stores/lens-global';
+
+import CompareSchema from '$lib/components/mainarea/widgets/schema/CompareSchema.svelte';
+import SchemaDetails from '$lib/components/mainarea/widgets/schema/SchemaDetails.svelte';
+import ColumnSizes from '$lib/components/mainarea/widgets/schema/ColumnSizes.svelte';
 
 
 export type Widget = {
@@ -360,7 +365,7 @@ export let overviewItems: OverviewItem[] = [
             h: 6,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 16 }
+            max: { w: 10, h: 12 }
         }),
         10: gridHelp.item({
             x: 0,
@@ -369,7 +374,7 @@ export let overviewItems: OverviewItem[] = [
             h: 6,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 16 }
+            max: { w: 16, h: 12 }
         }),
 
         20: gridHelp.item({
@@ -379,7 +384,7 @@ export let overviewItems: OverviewItem[] = [
             h: 5,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 16 }
+            max: { w: 18, h: 10 }
         }),
 
         30: gridHelp.item({
@@ -389,7 +394,7 @@ export let overviewItems: OverviewItem[] = [
             h: 5,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 16 },
+            max: { w: 18, h: 10 },
         }),
         40: gridHelp.item({
             x: 0,
@@ -398,7 +403,7 @@ export let overviewItems: OverviewItem[] = [
             h: 5,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 16 },
+            max: { w: 24, h: 10 },
         }),
         id: '1',
         Config: {
@@ -420,7 +425,7 @@ export let overviewItems: OverviewItem[] = [
             h: 6,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 10 }
+            max: { w: 10, h: 12 }
         }),
         10: gridHelp.item({
             x: 0,
@@ -429,7 +434,7 @@ export let overviewItems: OverviewItem[] = [
             h: 6,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 10 }
+            max: { w: 16, h: 12 }
         }),
 
         20: gridHelp.item({
@@ -439,7 +444,7 @@ export let overviewItems: OverviewItem[] = [
             h: 5,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 10 }
+            max: { w: 18, h: 10 }
         }),
 
         30: gridHelp.item({
@@ -449,7 +454,7 @@ export let overviewItems: OverviewItem[] = [
             h: 5,
             customDragger: true,
             customResizer: true,
-            max: { w: 8, h: 8 },
+            max: { w: 20, h: 10 },
         }),
         40: gridHelp.item({
             x: 12,
@@ -458,7 +463,7 @@ export let overviewItems: OverviewItem[] = [
             h: 5,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 8 },
+            max: { w: 24, h: 10 },
         }),
         id: '2',
         Config: {
@@ -480,7 +485,7 @@ export let overviewItems: OverviewItem[] = [
             h: 14,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 8 }
+            max: { w: 10, h: 28 }
         }),
         10: gridHelp.item({
             x: 0,
@@ -489,7 +494,7 @@ export let overviewItems: OverviewItem[] = [
             h: 14,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 8 }
+            max: { w: 12, h: 28 }
         }),
 
         20: gridHelp.item({
@@ -499,7 +504,7 @@ export let overviewItems: OverviewItem[] = [
             h: 12,
             customDragger: true,
             customResizer: true,
-            max: { w: 20, h: 8 }
+            max: { w: 40, h: 24 }
         }),
 
         30: gridHelp.item({
@@ -509,7 +514,7 @@ export let overviewItems: OverviewItem[] = [
             h: 11,
             customDragger: true,
             customResizer: true,
-            max: { w: 12, h: 8 },
+            max: { w: 38, h: 22 },
         }),
         40: gridHelp.item({
             x: 0,
@@ -518,7 +523,7 @@ export let overviewItems: OverviewItem[] = [
             h: 11,
             customDragger: true,
             customResizer: true,
-            max: { w: 20, h: 8 },
+            max: { w: 48, h: 22 },
         }),
         id: '3',
         Widget: {
@@ -532,52 +537,310 @@ export let overviewItems: OverviewItem[] = [
             x: 0,
             y: 12,
             w: 5,
-            h: 16,
+            h: 8,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 8 }
+            max: { w: 10, h: 16 }
         }),
         10: gridHelp.item({
             x: 0,
             y: 12,
             w: 8,
-            h: 16,
+            h: 8,
             customDragger: true,
             customResizer: true,
-            max: { w: 10, h: 8 }
+            max: { w: 16, h: 16 }
         }),
 
         20: gridHelp.item({
             x: 9,
             y: 0,
             w: 11,
-            h: 16,
+            h: 8,
             customDragger: true,
             customResizer: true,
-            max: { w: 20, h: 8 }
+            max: { w: 22, h: 16 }
         }),
 
         30: gridHelp.item({
             x: 19,
             y: 0,
             w: 11,
-            h: 16,
+            h: 8,
             customDragger: true,
             customResizer: true,
-            max: { w: 18, h: 8 },
+            max: { w: 22, h: 16 },
         }),
         40: gridHelp.item({
             x: 24,
             y: 0,
             w: 16,
-            h: 16,
+            h: 8,
             customDragger: true,
             customResizer: true,
-            max: { w: 20, h: 8 },
+            max: { w: 32, h: 16 },
         }),
         id: '4',
         Widget: {
-            Render: Metadata,
+            Render: Schema,
+            Params: null,
+        },
+        Reload: 0,
+    },
+    {
+        5: gridHelp.item({
+            x: 0,
+            y: 20,
+            w: 5,
+            h: 8,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 10, h: 16 }
+        }),
+        10: gridHelp.item({
+            x: 0,
+            y: 20,
+            w: 8,
+            h: 8,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 16, h: 16 }
+        }),
+
+        20: gridHelp.item({
+            x: 9,
+            y: 8,
+            w: 11,
+            h: 8,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 22, h: 16 }
+        }),
+
+        30: gridHelp.item({
+            x: 19,
+            y: 8,
+            w: 11,
+            h: 8,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 22, h: 16 },
+        }),
+        40: gridHelp.item({
+            x: 24,
+            y: 8,
+            w: 16,
+            h: 8,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 32, h: 16 },
+        }),
+        id: '5',
+        Widget: {
+            Render: PartitionNSnapshot,
+            Params: null,
+        },
+        Reload: 0,
+    },
+];
+
+
+// The setup when 'snapshot' option is selected.
+type SchemaItem = {
+    5: any;
+    10: any;
+    20: any;
+    30: any;
+    40: any;
+    id: string;
+    Config?: WidgetConfig;
+    Widget: Widget;
+    Reload: number;
+}
+export const schemaCols = [
+    [600, 5],
+    [900, 10],
+    [1300, 20],
+    [1500, 30],
+    [2000, 40]
+]
+export let schemaItems: SchemaItem[] = [
+    {
+        5: gridHelp.item({
+            x: 0,
+            y: 16,
+            w: 5,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 10, h: 12 }
+        }),
+        10: gridHelp.item({
+            x: 0,
+            y: 16,
+            w: 5,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 16, h: 12 }
+        }),
+
+        20: gridHelp.item({
+            x: 0,
+            y: 16,
+            w: 10,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 18, h: 10 }
+        }),
+
+        30: gridHelp.item({
+            x: 0,
+            y: 0,
+            w: 10,
+            h: 6,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 18, h: 10 },
+        }),
+        40: gridHelp.item({
+            x: 0,
+            y: 0,
+            w: 15,
+            h: 6,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 24, h: 10 },
+        }),
+        id: '0',
+        Config: {
+            Draggable: true,
+            Resizeable: true,
+            Reloadable: false,
+        },
+        Widget: {
+            Render: SchemaDetails,
+            Params: null,
+        },
+        Reload: 0,
+    },
+    {
+        5: gridHelp.item({
+            x: 0,
+            y: 0,
+            w: 5,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 10, h: 12 }
+        }),
+        10: gridHelp.item({
+            x: 0,
+            y: 0,
+            w: 10,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 16, h: 12 }
+        }),
+
+        20: gridHelp.item({
+            x: 0,
+            y: 0,
+            w: 20,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 18, h: 10 }
+        }),
+
+        30: gridHelp.item({
+            x: 10,
+            y: 0,
+            w: 20,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 30, h: 10 },
+        }),
+        40: gridHelp.item({
+            x: 15,
+            y: 0,
+            w: 25,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 40, h: 10 },
+        }),
+        id: '1',
+        Config: {
+            Draggable: true,
+            Resizeable: true,
+            Reloadable: true,
+        },
+        Widget: {
+            Render: CompareSchema,
+            Params: null,
+        },
+        Reload: 0,
+    },
+    {
+        5: gridHelp.item({
+            x: 0,
+            y: 0,
+            w: 5,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 10, h: 12 }
+        }),
+        10: gridHelp.item({
+            x: 5,
+            y: 16,
+            w: 5,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 16, h: 12 }
+        }),
+
+        20: gridHelp.item({
+            x: 10,
+            y: 16,
+            w: 10,
+            h: 16,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 18, h: 10 }
+        }),
+
+        30: gridHelp.item({
+            x: 0,
+            y: 6,
+            w: 10,
+            h: 10,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 30, h: 10 },
+        }),
+        40: gridHelp.item({
+            x: 0,
+            y: 6,
+            w: 15,
+            h: 10,
+            customDragger: true,
+            customResizer: true,
+            max: { w: 40, h: 10 },
+        }),
+        id: '2',
+        Config: {
+            Draggable: true,
+            Resizeable: true,
+            Reloadable: true,
+        },
+        Widget: {
+            Render: ColumnSizes,
             Params: null,
         },
         Reload: 0,

@@ -131,6 +131,8 @@
 		border-color: black;
 		border-radius: 5px;
 		border-width: 2px;
+
+		box-shadow: 0px 4px 8px var(--shadow-color);
 	}
 
 	.widget-top-bar {

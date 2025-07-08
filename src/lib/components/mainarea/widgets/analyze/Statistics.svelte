@@ -19,7 +19,6 @@
 		});
 		const resp = await update.json();
 		stats = resp.data;
-		console.log(stats);
 		loading = false;
 	}
 
@@ -82,7 +81,6 @@
 			<p class="static-card-desc {stats.Rows.DeltaCount > 0 ? 'green' : 'red'}">
 				{stats.Rows.DeltaCount > 0 ? '+' : ''}{stats.Rows.DeltaCount} from last state
 			</p>
-			<!-- <p class="static-card-sub-desc">+43.3K</p> -->
 		</div>
 		<div class="static-card">
 			<p class="static-card-title">
@@ -155,6 +153,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1.5fr;
 		grid-template-rows: 1fr 1fr;
+
 	}
 
 	.static-card:nth-child(1) {

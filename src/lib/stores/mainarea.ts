@@ -70,6 +70,17 @@ function setupGrid() {
 
 }
 
+const cadebounce = 1;
+if (browser) {
+    let init = 0;
+    contentActive.subscribe(() => {
+        init++;
+        if (init <= cadebounce) {
+            return;
+        }
+        setupGrid();
+    })
+}
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -86,6 +97,8 @@ export function goHome() {
 
 import { initCols, initItems } from '$lib/components/mainarea/warehouse.ts';
 import { overviewCols, overviewItems } from '$lib/components/mainarea/warehouse.ts';
+import { schemaCols, schemaItems } from '$lib/components/mainarea/warehouse.ts';
+import { browser } from "$app/environment";
 
 
 export type GridSetup = {
@@ -107,6 +120,13 @@ export const gridOptionMap: Map<string, GridSetup> = new Map([
         Option: '',
         Cols: overviewCols,
         Items: overviewItems,
+    }],
+
+    ['schema', {
+        Option: '',
+        Cols: schemaCols,
+        Items: schemaItems
+
     }]
 ])
 

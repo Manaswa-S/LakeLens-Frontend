@@ -11,21 +11,21 @@ const config = {
 		'ring-2', 'ring-gray-300', 'w-[12px]', 'h-[12px]',
 		'rounded-full', 'font-bold', 'stroke-3', 'stroke-4',
 		'object-cover', 'text-lg', 'text-base',
-		'ml-1', 'ml-2', 'text-sm', 'my-4',
+		'ml-1', 'ml-2', 'text-sm', 'my-4', 'rounded', 'rounded-md',
 		'flex', 'justify-between', 'items-center', 'gap-2', 'gap-4',
 		'ml-auto', 'max-w-[350px]', 'max-w-[450px]', 'truncate', 'text-muted-foreground',
 		'grid', 'grid-cols-[140px_1fr]', 'gap-2', 'items-center',
 		'w-fit', 'max-w-md', 'px-6', 'py-4', 'rounded-xl', 'shadow-md', 'border', 'border-zinc-200', 'dark:border-zinc-800',
 		'flex', 'h-16', 'shrink-0', 'items-center', 'gap-2', 'border-b', 'px-4', '-ml-1', 
 		'flex-1', 'flex-col', 'gap-4', 'p-4', 'auto-rows-min', 'gap-4', 'md:grid-cols-3',
-		'bg-muted/50', 'aspect-video', 'rounded-xl',
+		'bg-muted/50', 'aspect-video', 'rounded-xl', 'py-0',
 		'min-h-[100vh]', 'flex-1', 'rounded-xl', 'md:min-h-min',
 		'tracking-wide', 'uppercase', 'h-1', 'h-2', 'h-3', 'h-4', 'h-5', 'animate-spin',
 		'justify-start', 'underline',
 		'w-4', 'w-5', 'w-full', 'text-green-600', 'text-red-600', 'pt-2', 'pb-0', 'max-w-lg',
 		'transition-transform', 'duration-300', 'rotate-90', 'rotate-[360deg]', 'duration-2000',
 		'stroke-red-500', 'stroke-green-600', 'h-[15px]', 'w-[15px]', 'stroke-red-600', 'stroke-green-500',
-		'w-[250px]', 'w-[200px]', 'size-12', 'capitalize', 'uppercase'
+		'w-[250px]', 'w-[200px]', 'size-12', 'capitalize', 'uppercase', 'w-full', 'h-full'
 	],
 	theme: {
 		container: {

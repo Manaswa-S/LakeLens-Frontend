@@ -10,17 +10,17 @@ export const vhWidth = writable<number>(0);
 
 if (browser) {
 
-    vhHeight.subscribe(() => {
-        console.log('Viewport Height:', get(vhHeight));
-    })
+    // vhHeight.subscribe(() => {
+    //     // console.log('Viewport Height:', get(vhHeight));
+    // })
 
-    vhWidth.subscribe(() => {
-        console.log('Viewport Width:', get(vhWidth));
+    // vhWidth.subscribe(() => {
+    //     // console.log('Viewport Width:', get(vhWidth));
 
-        // if (width < 1200) {
-        // 	goto('/redirect?msg=Device+Width+Too+Low&countdown=3&redirect=%2Fhome');
-        // }
-    })
+    //     // if (width < 1200) {
+    //     // 	goto('/redirect?msg=Device+Width+Too+Low&countdown=3&redirect=%2Fhome');
+    //     // }
+    // })
 }
 
 

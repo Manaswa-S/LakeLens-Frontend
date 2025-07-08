@@ -51,12 +51,13 @@
 		initCols,
 		initItems,
 		overviewCols,
-		overviewItems
+		overviewItems,
+		schemaCols,
+		schemaItems
 	} from '$lib/components/mainarea/warehouse.ts';
 
 	gridCols.set(initCols);
 	gridItems.set(initItems);
-
 </script>
 
 <div class="header">

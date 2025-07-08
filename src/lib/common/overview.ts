@@ -15,8 +15,6 @@ export async function initAnalyzeLoc(locid: number | string) {
     });
     const resp = await update.json();
 
-    console.log(resp.data);
-
     if (resp.status !== 200) {
         toast.error(resp.data.Message);
         return;

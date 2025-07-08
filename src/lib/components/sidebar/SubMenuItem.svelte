@@ -91,7 +91,7 @@
 <ContextMenu.Root>
 	<ContextMenu.Trigger class="flex items-center rounded-md text-sm">
 		<Sidebar.MenuItem>
-			<Sidebar.MenuButton class="flex items-center justify-between">
+			<Sidebar.MenuButton class="flex items-center justify-between rounded">
 				<div class="flex items-center gap-2">
 					<Box class="w-4 h-4" />
 					{loc.BucketName}

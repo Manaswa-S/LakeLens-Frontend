@@ -40,3 +40,17 @@ export type LocChecks = {
     ReadCheck: boolean;
     WriteCheck: boolean;
 }
+
+type SchemaField = {
+    ID: Number;
+    Name: string;
+    Required: boolean;
+    Type: string | object;
+    Doc: string;
+}
+
+// The schema of an iceberg table.
+export type Schema = {
+    SchemaID: Number;
+    Fields: SchemaField[];
+};
