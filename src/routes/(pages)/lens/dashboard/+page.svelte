@@ -58,6 +58,10 @@
 
 	gridCols.set(initCols);
 	gridItems.set(initItems);
+
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 </script>
 
 <div class="header">
@@ -91,30 +95,30 @@
 
 	<nav class="nav">
 		{#key renderAddNew}
-			<div class="elem">
+			<div id="new-lake-root" class="elem">
 				<NewLake whenDone={refreshSidebar} />
 			</div>
 		{/key}
 
-		<div class="elem">
+		<div id="settings-root" class="elem">
 			<Settings />
 		</div>
 
-		<div class="elem">
+		<div id="profile-root" class="elem">
 			<ProfileMenu />
 		</div>
 	</nav>
 </div>
 
 <div class="content">
-	<div class="sidebar sidebar-right-border" bind:clientWidth={$sidebarWidth}>
+	<div id="sidebar-projects-root" class="sidebar sidebar-right-border" bind:clientWidth={$sidebarWidth}>
 		<Sidebar.Provider bind:open={$sidebarOpen}>
 			<SideBar />
 		</Sidebar.Provider>
 	</div>
 
 	{#if $MainAreaGridActive}
-		<div class="main-area">
+		<div id="mainarea-root" class="main-area">
 			<MainArea />
 		</div>
 	{/if}

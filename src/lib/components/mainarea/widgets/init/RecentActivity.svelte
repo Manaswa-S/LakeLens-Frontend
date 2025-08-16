@@ -4,8 +4,19 @@
 
 	let loading = $state(true);
 
-	function demoData() {}
-	demoData();
+	async function getData() {
+		const update = await fetch(`/api/lens/meta/recents/activity/0`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const resp = await update.json();
+		console.log(resp);
+		loading = false;
+	}
+
+	getData();
 </script>
 
 <div class="welcome-heading">

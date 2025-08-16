@@ -32,6 +32,15 @@
 	});
 
 	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	import { processFeaturesTour } from '$lib/components/featuresTour/FeaturesTour.js';
+
+	// The isNewUser is supposed to come from backend
+	// Lets ask the user if he wants a tour.
+
+	onMount(() => {
+		processFeaturesTour(data.tourData);
+	});
 </script>
 
 <slot />
@@ -78,4 +87,6 @@
 
 	@import '$lib/styles/lens/shadcn-lens.css';
 	@import '$lib/styles/lens/lens.css';
+
+	@import '$lib/styles/tour.css';
 </style>

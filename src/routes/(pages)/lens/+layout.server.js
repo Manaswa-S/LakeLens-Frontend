@@ -14,16 +14,18 @@ export async function load({cookies}) {
         }
     }
     
-    const [accSettings] = await Promise.all([
+    const [accSettings, tourData] = await Promise.all([
         safeCall(() => loadAccSettings(cookies)),
+        safeCall(() => loadFeaturesTour(cookies)),
     ]);
 
-    if (!accSettings) {
+    if (!accSettings || !tourData) {
         redirect(308, "/home");
     }
 
     return {
-        accSettings
+        accSettings,
+        tourData
     }
     
 }
@@ -36,4 +38,14 @@ async function loadAccSettings(cookies) {
         cookies
     });
     return accSettings.data;
+}
+
+
+async function loadFeaturesTour(cookies) {
+
+	const tourData = await callGoRoute({
+        url: `/lens/manager/features/tour`,
+        cookies
+    });
+    return tourData.data;
 }
